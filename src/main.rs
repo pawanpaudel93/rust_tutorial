@@ -1,12 +1,12 @@
 #![allow(unused)]
 
-use std::io;
 use rand::Rng;
-use std::io::{Write, BufReader, BufRead, ErrorKind};
-use std::fs::File;
 use std::cmp::Ordering;
-use std::ops::Add;
 use std::collections::HashMap;
+use std::fs::File;
+use std::io;
+use std::io::{BufRead, BufReader, ErrorKind, Write};
+use std::ops::Add;
 
 mod restaurant;
 use crate::restaurant::order_food;
@@ -15,7 +15,8 @@ fn variables() {
     println!("What is your name?");
     let mut name = String::new();
     let greeting = "Nice to meet you";
-    io::stdin().read_line(&mut name)
+    io::stdin()
+        .read_line(&mut name)
         .expect("Didn't Receive Input");
 
     println!("Hello, {}! {}", name.trim_end(), greeting);
@@ -25,8 +26,7 @@ fn constants() {
     const ONE_MIL: u32 = 1_000_000;
     const PI: f32 = 3.141592;
     let age = "47";
-    let mut age: u32 = age.trim().parse()
-        .expect("Age wasn't assigned a number");
+    let mut age: u32 = age.trim().parse().expect("Age wasn't assigned a number");
     age = age + 1;
     println!("I'm {} and I want ${}", age, ONE_MIL);
 }
@@ -65,11 +65,7 @@ fn if_else() {
     }
 
     let mut my_age = 47;
-    let can_vote = if my_age >= 18 {
-        true
-    } else {
-        false
-    };
+    let can_vote = if my_age >= 18 { true } else { false };
     println!("Can vote: {}", can_vote);
 }
 
@@ -92,11 +88,11 @@ fn matches_fn() {
 }
 
 fn loops() {
-    let arr_1 = [1,2,3,4];
+    let arr_1 = [1, 2, 3, 4];
     println!("1st : {}", arr_1[0]);
     println!("Length: {}", arr_1.len());
 
-    let arr_2 = [1,2,3,4,5,6,7,8,9];
+    let arr_2 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let mut loop_idx = 0;
     loop {
         if arr_2[loop_idx] % 2 == 0 {
@@ -115,7 +111,7 @@ fn loops() {
 }
 
 fn while_loop() {
-    let arr_2 = [1,2,3,4,5,6,7,8,9];
+    let arr_2 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let mut loop_idx = 0;
     while loop_idx < arr_2.len() {
         println!("Arr: {}", arr_2[loop_idx]);
@@ -124,7 +120,7 @@ fn while_loop() {
 }
 
 fn for_loop() {
-    let arr_2 = [1,2,3,4,5,6,7,8,9];
+    let arr_2 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let mut loop_idx = 0;
     for val in arr_2.iter() {
         println!("Value: {}", val);
@@ -175,7 +171,7 @@ fn strings() {
 }
 
 fn casting() {
-    let int_u8 : u8 = 5;
+    let int_u8: u8 = 5;
     let int2_u8: u8 = 4;
     let int3_u32 = (int_u8 as u32) + (int2_u8 as u32);
 }
@@ -188,14 +184,14 @@ fn enums() {
         Thursday,
         Friday,
         Saturday,
-        Sunday
+        Sunday,
     }
 
     impl Day {
         fn is_weekend(&self) -> bool {
-            match self { 
-                Day::Saturday | Day:: Sunday => true,
-                _ => false
+            match self {
+                Day::Saturday | Day::Sunday => true,
+                _ => false,
             }
         }
     }
@@ -208,23 +204,23 @@ fn enums() {
         Day::Thursday => println!("Pay day"),
         Day::Friday => println!("Almost weekend"),
         Day::Saturday => println!("Weekend"),
-        Day::Sunday => println!("Weekend")   
+        Day::Sunday => println!("Weekend"),
     }
-    println!("Is today the weekend {}", today.is_weekend()); 
+    println!("Is today the weekend {}", today.is_weekend());
 }
 
 fn vector() {
     let vec1: Vec<i32> = Vec::new();
-    let mut vec2 = vec![1,2,3,4];
+    let mut vec2 = vec![1, 2, 3, 4];
     vec2.push(5);
     println!("1st : {}", vec2[0]);
-    let second = &vec2[1]; 
+    let second = &vec2[1];
     match vec2.get(1) {
         Some(second) => println!("2nd: {}", second),
-        None => println!("No 2nd value")
+        None => println!("No 2nd value"),
     }
     for i in &mut vec2 {
-        *i *= 2; 
+        *i *= 2;
     }
     for i in &vec2 {
         println!("{}", i);
@@ -235,19 +231,19 @@ fn vector() {
 
 fn sum_list(list: &[i32]) -> i32 {
     let mut sum = 0;
-    for val in list.iter() { 
+    for val in list.iter() {
         sum += val;
     }
     return sum;
 }
 
 fn sums() {
-    let num_list = vec![1,2,3,4,5];
+    let num_list = vec![1, 2, 3, 4, 5];
     println!("Sum of list = {}", sum_list(&num_list));
 }
 
 fn get_sum_gen<T: Add<Output = T>>(x: T, y: T) -> T {
-    return  x + y;
+    return x + y;
 }
 
 fn generics() {
@@ -261,7 +257,7 @@ fn hashmaps() {
     heroes.insert("Batman", "Bruce Wayne");
     heroes.insert("The Flash", "Barry Allen");
 
-    for (k,v) in heroes.iter() {
+    for (k, v) in heroes.iter() {
         println!("{} = {}", k, v);
     }
 
@@ -269,7 +265,7 @@ fn hashmaps() {
         let the_batman = heroes.get("Batman");
         match the_batman {
             Some(x) => println!("Batman is a hero"),
-            None => println!("Batman is not a hero") 
+            None => println!("Batman is not a hero"),
         }
     }
 
@@ -280,13 +276,13 @@ fn structs() {
     struct Customer {
         name: String,
         address: String,
-        balance: f32
+        balance: f32,
     }
 
-    let mut bob = Customer{
+    let mut bob = Customer {
         name: String::from("Bob Smith"),
         address: String::from("555 Main St"),
-        balance: 234.50
+        balance: 234.50,
     };
     bob.address = String::from("505 Main St");
 
@@ -296,7 +292,7 @@ fn structs() {
     // }
 
     // let rec = Rectangle{
-    //     length: 4, height: 10.4   
+    //     length: 4, height: 10.4
     // };
 
     const PI: f32 = 3.141592;
@@ -306,33 +302,67 @@ fn structs() {
         fn area(&self) -> f32;
     }
 
-    struct Rectangle {length:f32, width: f32};
-    struct Circle {length: f32, width: f32}; 
+    struct Rectangle {
+        length: f32,
+        width: f32,
+    };
+    struct Circle {
+        length: f32,
+        width: f32,
+    };
 
     impl Shape for Rectangle {
         fn new(length: f32, width: f32) -> Rectangle {
-            return Rectangle{length,width};
+            return Rectangle { length, width };
         }
 
         fn area(&self) -> f32 {
             return self.length * self.width;
-        }  
+        }
     }
 
     impl Shape for Circle {
         fn new(length: f32, width: f32) -> Circle {
-            return Circle{length,width};
+            return Circle { length, width };
         }
 
         fn area(&self) -> f32 {
-            return (self.length/2.0).powf(2.0) * PI;
-        }  
+            return (self.length / 2.0).powf(2.0) * PI;
+        }
     }
 
     let rec: Rectangle = Shape::new(10.0, 10.0);
     let circ: Circle = Shape::new(10.0, 10.0);
     println!("Rec Area: {}", rec.area());
     println!("Circ Area: {}", circ.area());
+}
+
+fn read_write_files() {
+    let path = "lines.txt";
+    let output = File::create(path);
+    let mut output = match output {
+        Ok(file) => file,
+        Err(error) => panic!("Problem creating file : {:?}", error),
+    };
+    write!(output, "Just some\nRandom words").expect("Failed to write to file");
+
+    let input = File::open(path).unwrap();
+    let buffered = BufReader::new(input);
+    for line in buffered.lines() {
+        println!("{}", line.unwrap());
+    }
+
+    let output2 = File::create("rand.txt");
+    let output2 = match output2 {
+        Ok(file) => file,
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => match File::create("rand.txt") {
+                Ok(fc) => fc,
+                Err(e) => panic!("Can't create file: {:?}", error),
+            },
+            _other_error => panic!("Problem opening file: {:?}", error),
+        },
+    };
 }
 
 fn main() {
@@ -350,5 +380,6 @@ fn main() {
     // generics()
     // hashmaps()
     // structs()
-    order_food();
+    // order_food();
+    // read_write_files()
 }
