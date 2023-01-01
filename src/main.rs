@@ -8,6 +8,9 @@ use std::cmp::Ordering;
 use std::ops::Add;
 use std::collections::HashMap;
 
+mod restaurant;
+use crate::restaurant::order_food;
+
 fn variables() {
     println!("What is your name?");
     let mut name = String::new();
@@ -347,4 +350,5 @@ fn main() {
     // generics()
     // hashmaps()
     // structs()
+    order_food();
 }
