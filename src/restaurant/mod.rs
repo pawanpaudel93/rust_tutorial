@@ -7,10 +7,10 @@ mod pizza_order {
 
     impl Pizza {
         pub fn lunch(topping: &str) -> Pizza {
-            Pizza{
+            Pizza {
                 dough: String::from("regular dough"),
-                cheese:  String::from("mozzarella"),
-                topping: String::from(topping)
+                cheese: String::from("mozzarella"),
+                topping: String::from(topping),
             }
         }
     }
@@ -27,7 +27,10 @@ mod pizza_order {
         }
 
         fn serve_customer(cust_pizza: super::Pizza) {
-            println!("The customer is served a regular pizza with {}", cust_pizza.topping);
+            println!(
+                "The customer is served a regular pizza with {}",
+                cust_pizza.topping
+            );
         }
     }
 }
